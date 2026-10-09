@@ -96,9 +96,21 @@ const login = async (req, res) => {
             message: error.message
         });
     }
-};
+}
+
+//logout
+const logout = async(req, res)=>{
+    try { res.clearCookie("token", 
+        { httpOnly: true, secure: false, sameSite: "lax" })
+        return res.status(200).json({ message: "Logout successful" })
+
+    } catch (error) { 
+        return res.status(500).json({ message: error.message })
+    }
+}
 
 module.exports = {
     login,
-    createUser
+    createUser,
+    logout
 }

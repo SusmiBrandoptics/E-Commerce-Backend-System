@@ -1,7 +1,7 @@
 const express = require('express');
 
 const { getUsers, getUserById, updateProfile, deleteUser } = require('../controllers/userProfile');
-const { createUser, login } = require('../controllers/authentication');
+const { createUser, login, logout } = require('../controllers/authentication');
 const { validateToken, authorizeRoles } = require('../middleware/authMiddleware');
 
 const userRoutes = express.Router()
@@ -17,5 +17,7 @@ userRoutes.get('/:id', validateToken, authorizeRoles("admin"), getUserById)
 userRoutes.delete('/:id',validateToken, authorizeRoles("admin"), deleteUser)
 
 userRoutes.put('/profile', validateToken, updateProfile)
+
+userRoutes.post('/logout', logout)
 
 module.exports = userRoutes
