@@ -45,7 +45,7 @@ const updateProfile = async (req, res) => {
 
         const { name, email, phone } = req.body;
 
-        const updatedUser = await User.findByIdAndUpdate(req.params.id,
+        const updatedUser = await User.findByIdAndUpdate(req.user.id,
             { name, email, phone },
             { new: true, runValidator: true }).select("-password")
 
